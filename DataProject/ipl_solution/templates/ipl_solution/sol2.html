@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Ipl-Solution-Project
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+  <body>
+    hi {{ name }}
+    <form action="" method="post">
+      {% csrf_token %} {{ form }}
+      <input type="submit" value="Submit" />
+    </form>
+    {% block content %}
+    <div class="row text-center">
+      <br />
+      <div id="container">
+        <script type="text/javascript">
+          document.addEventListener("DOMContentLoaded", function () {
+            Highcharts.chart("container", {
+              chart: {
+                type: "column",
+              },
+              title: {
+                text: "Teams vs total runs",
+              },
+              xAxis: {
+                type: "category",
+                title: {
+                  text: "Teams",
+                },
+                labels: {
+                  rotation: -90,
+                  style: {
+                    fontSize: "13px",
+                    fontFamily: "Verdana, sans-serif",
+                  },
+                },
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: "Scores",
+                },
+              },
+              legend: {
+                enabled: false,
+              },
+              tooltip: {
+                pointFormat: "Total runs: <b>{point.y:.1f}</b>",
+              },
+              series: [
+                {
+                  data: {"Kochi_Tuskers_Kerala": 1901, "Rising_Pune_Supergiants": 2063, "Rising_Pune_Supergiant": 2470, "Gujarat_Lions": 4862, "Pune_Warriors": 6358, "Deccan_Chargers": 11463, "Sunrisers_Hyderabad": 11652, "Rajasthan_Royals": 17703, "Chennai_Super_Kings": 20899, "Delhi_Daredevils": 21953, "Kolkata_Knight_Riders": 21965, "Kings_XI_Punjab": 23068, "Royal_Challengers_Bangalore": 23436, "Mumbai_Indians": 24521},
+                  dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: "#FFFFFF",
+                    align: "right",
+                    format: "{point.y:.1f}",
+                    y: 10,
+                    style: {
+                      fontSize: "13px",
+                      fontFamily: "Verdana, sans-serif",
+                    },
+                  },
+                },
+              ],
+            });
+          });
+        </script>
+      </div>
+    </div>
+    {% endblock %}
+  </body>
+</html>

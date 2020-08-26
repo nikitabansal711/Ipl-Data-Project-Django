@@ -1,0 +1,75 @@
+{% extends "ipl_solution/base.html" %} {% block content %}
+<div class="row text-center">
+  <br />
+  <div class="container">
+    <div class="row">
+      <h3>Choose teams</h3>
+      <form action="">
+        <select
+          name="teams"
+          class="form-control select-checkbox"
+          size="5"
+          id="teams"
+          multiple
+        >
+          <option value="Chennai_Super_Kings">Chennai_Super_Kings</option>
+          <option value="Deccan_Chargers">Deccan_Chargers</option>
+          <option value="Delhi_Daredevils">Delhi_Daredevils</option>
+          <option value="Gujarat_Lions">Gujarat_Lions</option>
+          <option value="Kings_XI_Punjab">Kings_XI_Punjab</option>
+          <option value="Kochi_Tuskers_Kerala">Kochi_Tuskers_Kerala</option>
+          <option value="Kolkata_Knight_Riders">Kolkata_Knight_Riders</option>
+          <option value="Mumbai_Indians">Mumbai_Indians</option>
+          <option value="Pune_Warriors">Pune_Warriors</option>
+          <option value="Rajasthan_Royals">Rajasthan_Royals</option>
+          <option value="Rising_Pune_Supergiant">Rising_Pune_Supergiant</option>
+          <option value="Rising_Pune_Supergiants">
+            Rising_Pune_Supergiants
+          </option>
+          <option value="Royal_Challengers_Bangalore">
+            Royal_Challengers_Bangalore
+          </option>
+          <option value="Sunrisers_Hyderabad">Sunrisers_Hyderabad</option>
+        </select>
+        <br /><br />
+      </form>
+      <h3>Choose range of total runs</h3>
+      <form action="">
+        <h4>choose start</h4>
+        <select
+          name="runs"
+          class="form-control select-checkbox"
+          size="5"
+          id="start"
+        >
+          <option value="0">0</option>
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+          <option value="15000">15000</option>
+          <option value="20000">20000</option>
+          <option value="25000">25000</option>
+        </select>
+        <h4>choose end</h4>
+        <select
+          name="runs"
+          class="form-control select-checkbox"
+          size="5"
+          id="end"
+        >
+          <option value="5000">5000</option>
+          <option value="10000">10000</option>
+          <option value="15000">15000</option>
+          <option value="20000">20000</option>
+          <option value="25000">25000</option>
+          <option value="30000">30000</option>
+        </select>
+        <br /><br />
+      </form>
+      <button id="submit" onclick="plotGraphs1('teams','start','end');">
+        Show graph
+      </button>
+      <div id="container"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}
