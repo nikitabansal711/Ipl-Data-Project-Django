@@ -228,20 +228,29 @@ def match_team_season_graph(request):
             data = json.loads(request.body.decode("utf-8"))
             seasons = data["seasons"]
             teams = data["teams"]
-            if seasons:
+            if seasons and teams:
                 filtered_data = (
                     Match.objects.values("team1", "season")
-                    .filter(season__in=seasons)
-                    .annotate(total_matches=Count("team1"))
-                    .order_by("season")
+                        .filter(season__in=seasons,
+                                team1__in=teams)
+                        .annotate(total_matches=Count("team1"))
+                        .order_by("season")
                 )
-            elif teams:
-                filtered_data = (
-                    Match.objects.values("team1", "season")
-                    .filter(team1__in=teams)
-                    .annotate(total_matches=Count("team1"))
-                    .order_by("season")
-                )
+            elif seasons or teams:
+                if seasons:
+                    filtered_data = (
+                        Match.objects.values("team1", "season")
+                        .filter(season__in=seasons)
+                        .annotate(total_matches=Count("team1"))
+                        .order_by("season")
+                        )
+                if teams:
+                    filtered_data = (
+                        Match.objects.values("team1", "season")
+                            .filter(team1__in=teams)
+                            .annotate(total_matches=Count("team1"))
+                            .order_by("season")
+                    )
             else:
                 filtered_data = (
                     Match.objects.values("team1", "season")
