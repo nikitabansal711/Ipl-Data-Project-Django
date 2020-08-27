@@ -16,19 +16,23 @@ function getCookie(name) {
   return cookieValue;
 }
 
+function helper_populateDropdown(select, options) {
+  for (var i = 0; i < options.length; i++) {
+    var opt = options[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    select.appendChild(el);
+  }
+}
+
 function populateDropdown(fieldID) {
   var select = document.getElementById(fieldID);
   fetch("http://127.0.0.1:8000/ipl/player-data/")
     .then((response) => response.json())
     .then((data) => {
       var options = data["data"];
-      for (var i = 0; i < options.length; i++) {
-        var opt = options[i];
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      }
+      helper_populateDropdown(select, options);
     });
 }
 
@@ -50,13 +54,7 @@ function populateDropdown3(fieldID) {
     .then((data) => {
       data = JSON.parse(data["data"]);
       var options = data["nations"];
-      for (var i = 0; i < options.length; i++) {
-        var opt = options[i];
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      }
+      helper_populateDropdown(select, options);
     });
 }
 
@@ -67,13 +65,7 @@ function populateDropdown4(fieldID) {
     .then((data) => {
       data = JSON.parse(data["data"]);
       var options = Object.keys(data);
-      for (var i = 0; i < options.length; i++) {
-        var opt = options[i];
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      }
+      helper_populateDropdown(select, options);
     });
 }
 
@@ -83,13 +75,7 @@ function populateDropdown5(fieldID) {
     .then((response) => response.json())
     .then((data) => {
       var options = data["data"];
-      for (var i = 0; i < options.length; i++) {
-        var opt = options[i];
-        var el = document.createElement("option");
-        el.textContent = opt;
-        el.value = opt;
-        select.appendChild(el);
-      }
+      helper_populateDropdown(select, options);
     });
 }
 
@@ -106,18 +92,11 @@ function getMultipleSelected(fieldID) {
   return arrayOfSelecedIDs;
 }
 
-function plotGraphs1(fieldID1, fieldID2, fieldID3) {
-  teams = getMultipleSelected(fieldID1);
-  start = getMultipleSelected(fieldID2);
-  end = getMultipleSelected(fieldID3);
+function plotBarGraph(body, url, title_text, x_text, y_text, tootltip_text) {
   let csrftoken = getCookie("csrftoken");
-  fetch("http://127.0.0.1:8000/ipl/teams-runs-graph/", {
+  fetch(url, {
     method: "POST",
-    body: JSON.stringify({
-      teams: teams,
-      start: start,
-      end: end,
-    }),
+    body: body,
     headers: {
       Accept: "application/json, text/plain",
       "Content-Type": "application/json",
@@ -134,10 +113,13 @@ function plotGraphs1(fieldID1, fieldID2, fieldID3) {
           type: "column",
         },
         title: {
-          text: "Teams vs total runs",
+          text: title_text,
         },
         xAxis: {
           type: "category",
+          title: {
+            text: x_text,
+          },
           labels: {
             rotation: -90,
             style: {
@@ -149,14 +131,14 @@ function plotGraphs1(fieldID1, fieldID2, fieldID3) {
         yAxis: {
           min: 0,
           title: {
-            text: "Scores",
+            text: y_text,
           },
         },
         legend: {
           enabled: false,
         },
         tooltip: {
-          pointFormat: "Total runs: <b>{point.y:.1f}</b>",
+          pointFormat: tootltip_text + ": <b>{point.y:.1f}</b>",
         },
         series: [
           {
@@ -177,148 +159,48 @@ function plotGraphs1(fieldID1, fieldID2, fieldID3) {
         ],
       });
     });
+}
+
+function plotGraphs1(fieldID1, fieldID2, fieldID3) {
+  teams = getMultipleSelected(fieldID1);
+  start = getMultipleSelected(fieldID2);
+  end = getMultipleSelected(fieldID3);
+  var url = "http://127.0.0.1:8000/ipl/teams-runs-graph/";
+  var body = JSON.stringify({
+    teams: teams,
+    start: start,
+    end: end,
+  });
+  plotBarGraph(body, url, "Teams vs total runs", "Teams", "Runs", "Total runs");
 }
 
 function plotGraphs2(fieldID1, fieldID2, fieldID3) {
   players = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
-  let csrftoken = getCookie("csrftoken");
-  fetch("http://127.0.0.1:8000/ipl/player-runs-graph/", {
-    method: "POST",
-    body: JSON.stringify({
-      players: players,
-      start: start,
-      end: end,
-    }),
-    headers: {
-      Accept: "application/json, text/plain",
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrftoken,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      data = data["data"];
-      let obj;
-      obj = JSON.parse(data);
-      Highcharts.chart("container", {
-        chart: {
-          type: "column",
-        },
-        title: {
-          text: "Teams vs total runs",
-        },
-        xAxis: {
-          type: "category",
-          labels: {
-            rotation: -90,
-            style: {
-              fontSize: "13px",
-              fontFamily: "Verdana, sans-serif",
-            },
-          },
-        },
-        yAxis: {
-          min: 0,
-          title: {
-            text: "Scores",
-          },
-        },
-        legend: {
-          enabled: false,
-        },
-        tooltip: {
-          pointFormat: "Total runs: <b>{point.y:.1f}</b>",
-        },
-        series: [
-          {
-            data: Object.entries(obj),
-            dataLabels: {
-              enabled: true,
-              rotation: -90,
-              color: "#FFFFFF",
-              align: "right",
-              format: "{point.y:.1f}",
-              y: 10,
-              style: {
-                fontSize: "13px",
-                fontFamily: "Verdana, sans-serif",
-              },
-            },
-          },
-        ],
-      });
-    });
+  var url = "http://127.0.0.1:8000/ipl/player-runs-graph/";
+  var body = JSON.stringify({
+    players: players,
+    start: start,
+    end: end,
+  });
+  plotBarGraph(body, url, "Players vs runs", "Players", "Runs", "Total runs");
 }
 
 function plotGraphs3(fieldID1) {
   nations = getMultipleSelected(fieldID1);
-  let csrftoken = getCookie("csrftoken");
-  fetch("http://127.0.0.1:8000/ipl/umpire-nation-graph/", {
-    method: "POST",
-    body: JSON.stringify({
-      nations: nations,
-    }),
-    headers: {
-      Accept: "application/json, text/plain",
-      "Content-Type": "application/json",
-      "X-CSRFToken": csrftoken,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      data = data["data"];
-      let obj;
-      obj = JSON.parse(data);
-      Highcharts.chart("container", {
-        chart: {
-          type: "column",
-        },
-        title: {
-          text: "Number of umpires vs nationality",
-        },
-        xAxis: {
-          type: "category",
-          labels: {
-            rotation: -90,
-            style: {
-              fontSize: "13px",
-              fontFamily: "Verdana, sans-serif",
-            },
-          },
-        },
-        yAxis: {
-          min: 0,
-          title: {
-            text: "number of umpires",
-          },
-        },
-        legend: {
-          enabled: false,
-        },
-        tooltip: {
-          pointFormat: "Total runs: <b>{point.y:.1f}</b>",
-        },
-        series: [
-          {
-            data: Object.entries(obj),
-            dataLabels: {
-              enabled: true,
-              rotation: -90,
-              color: "#FFFFFF",
-              align: "right",
-              format: "{point.y:.1f}",
-              y: 10,
-              style: {
-                fontSize: "13px",
-                fontFamily: "Verdana, sans-serif",
-              },
-            },
-          },
-        ],
-      });
-    });
+  var url = "http://127.0.0.1:8000/ipl/umpire-nation-graph/";
+  var body = JSON.stringify({
+    nations: nations,
+  });
+  plotBarGraph(
+    body,
+    url,
+    "Number of umpires vs nationality",
+    "Nations",
+    "NUmber of umpires",
+    "Number of umpires"
+  );
 }
 
 function plotGraphs4(fieldID1, fieldID2) {
