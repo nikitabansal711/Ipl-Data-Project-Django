@@ -11,11 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07735afc-0966-4ca7-a160-58890c0a4fc2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/DataProject/DataProject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/DataProject/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/static/ipl_solution/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/static/ipl_solution/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/static/ipl_solution/js/ipl_solution_home.js" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/static/ipl_solution/js/ipl_solution_home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol1.html" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol2.html" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol3.html" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol4.html" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/templates/ipl_solution/sol4.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataProject/ipl_solution/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/DataProject/ipl_solution/views.py" afterDir="false" />
     </list>
@@ -120,26 +123,26 @@
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state x="586" y="216" width="424" height="496" key="FileChooserDialogImpl/72.27.1464.837@72.27.1464.837" timestamp="1598087093568" />
-    <state width="1418" height="170" key="GridCell.Tab.0.bottom" timestamp="1598519780636">
+    <state width="1418" height="107" key="GridCell.Tab.0.bottom" timestamp="1598524048663">
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state width="1418" height="357" key="GridCell.Tab.0.bottom/144.54.2928.1674@144.54.2928.1674" timestamp="1598117062241" />
-    <state width="1418" height="170" key="GridCell.Tab.0.bottom/72.27.1464.837@72.27.1464.837" timestamp="1598519780636" />
-    <state width="1418" height="170" key="GridCell.Tab.0.center" timestamp="1598519780633">
+    <state width="1418" height="107" key="GridCell.Tab.0.bottom/72.27.1464.837@72.27.1464.837" timestamp="1598524048663" />
+    <state width="1418" height="107" key="GridCell.Tab.0.center" timestamp="1598524048661">
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state width="1418" height="357" key="GridCell.Tab.0.center/144.54.2928.1674@144.54.2928.1674" timestamp="1598117062240" />
-    <state width="1418" height="170" key="GridCell.Tab.0.center/72.27.1464.837@72.27.1464.837" timestamp="1598519780633" />
-    <state width="1418" height="170" key="GridCell.Tab.0.left" timestamp="1598519780632">
+    <state width="1418" height="107" key="GridCell.Tab.0.center/72.27.1464.837@72.27.1464.837" timestamp="1598524048661" />
+    <state width="1418" height="107" key="GridCell.Tab.0.left" timestamp="1598524048659">
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state width="1418" height="357" key="GridCell.Tab.0.left/144.54.2928.1674@144.54.2928.1674" timestamp="1598117062239" />
-    <state width="1418" height="170" key="GridCell.Tab.0.left/72.27.1464.837@72.27.1464.837" timestamp="1598519780632" />
-    <state width="1418" height="170" key="GridCell.Tab.0.right" timestamp="1598519780634">
+    <state width="1418" height="107" key="GridCell.Tab.0.left/72.27.1464.837@72.27.1464.837" timestamp="1598524048659" />
+    <state width="1418" height="107" key="GridCell.Tab.0.right" timestamp="1598524048662">
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state width="1418" height="357" key="GridCell.Tab.0.right/144.54.2928.1674@144.54.2928.1674" timestamp="1598117062241" />
-    <state width="1418" height="170" key="GridCell.Tab.0.right/72.27.1464.837@72.27.1464.837" timestamp="1598519780634" />
+    <state width="1418" height="107" key="GridCell.Tab.0.right/72.27.1464.837@72.27.1464.837" timestamp="1598524048662" />
     <state width="1418" height="254" key="GridCell.Tab.1.bottom" timestamp="1598272119515">
       <screen x="72" y="27" width="1464" height="837" />
     </state>
@@ -164,5 +167,9 @@
       <screen x="72" y="27" width="1464" height="837" />
     </state>
     <state x="588" y="361" width="428" height="182" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/72.27.1464.837@72.27.1464.837" timestamp="1598117697887" />
+    <state x="467" y="185" width="672" height="678" key="search.everywhere.popup" timestamp="1598524096307">
+      <screen x="72" y="27" width="1464" height="837" />
+    </state>
+    <state x="467" y="185" width="672" height="678" key="search.everywhere.popup/72.27.1464.837@72.27.1464.837" timestamp="1598524096307" />
   </component>
 </project>

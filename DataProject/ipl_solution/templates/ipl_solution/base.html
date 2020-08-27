@@ -32,9 +32,24 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'teams_runs' %}">
+          <a class="navbar-brand" href="{% url 'ipl:teams_runs' %}">
             <strong>Ipl Data Project</strong></a
           >
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="{% url 'ipl:player_runs' %}"> Player vs Runs </a>
+            </li>
+            <li>
+              <a href="{% url 'ipl:umpire_nationality' %}"> Umpires vs nationality </a>
+            </li>
+            <li>
+              <a href="{% url 'ipl:matches_teams_season' %}">
+                Number of matches by teams by season
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

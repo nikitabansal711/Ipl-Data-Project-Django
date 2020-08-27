@@ -1,13 +1,13 @@
 import json
-
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import Delivery, Match, Umpire
 from django.db.models import Sum, Count
 from .config import logger
 
 
 def teams_runs(request):
+    """renders the home page"""
     try:
         return render(request, "ipl_solution/sol1.html")
     except Exception as e:
@@ -15,11 +15,12 @@ def teams_runs(request):
 
 
 def teams_runs_data(request):
+    """returns json data of teams vs runs"""
     try:
         data = (
             Delivery.objects.values("batting_team")
-                .annotate(total_runs=Sum("total_runs"))
-                .order_by("total_runs")
+            .annotate(total_runs=Sum("total_runs"))
+            .order_by("total_runs")
         )
         teams = []
         for row in data:
@@ -31,6 +32,7 @@ def teams_runs_data(request):
 
 
 def teams_runs_graph(request):
+    """return json data required for plot"""
     try:
         if request.method == "POST":
             data = json.loads(request.body.decode("utf-8"))
@@ -40,23 +42,23 @@ def teams_runs_graph(request):
             if teams:
                 filtered_data = (
                     Delivery.objects.values("batting_team")
-                        .filter(batting_team__in=teams)
-                        .annotate(total_runs=Sum("total_runs"))
-                        .filter(
+                    .filter(batting_team__in=teams)
+                    .annotate(total_runs=Sum("total_runs"))
+                    .filter(
                         total_runs__gte=int(start[0] or 0),
                         total_runs__lte=int(end[0]) or 30000,
                     )
-                        .order_by("total_runs")
+                    .order_by("total_runs")
                 )
             else:
                 filtered_data = (
                     Delivery.objects.values("batting_team")
-                        .annotate(total_runs=Sum("total_runs"))
-                        .filter(
+                    .annotate(total_runs=Sum("total_runs"))
+                    .filter(
                         total_runs__gte=int(start[0] or 0),
                         total_runs__lte=int(end[0]) or 30000,
                     )
-                        .order_by("total_runs")
+                    .order_by("total_runs")
                 )
             sol_dict = {}
             for row in filtered_data:
@@ -68,6 +70,7 @@ def teams_runs_graph(request):
 
 
 def player_runs(request):
+    """renders html page for players vs runs"""
     try:
         return render(request, "ipl_solution/sol2.html")
     except Exception as e:
@@ -75,11 +78,12 @@ def player_runs(request):
 
 
 def player_data(request):
+    """returns json data for players vs runs"""
     data = (
         Delivery.objects.values("batsman")
-            .filter(batting_team="Royal_Challengers_Bangalore")
-            .annotate(total_runs=Sum("total_runs"))
-            .order_by("batsman")
+        .filter(batting_team="Royal_Challengers_Bangalore")
+        .annotate(total_runs=Sum("total_runs"))
+        .order_by("batsman")
     )
     sol_dict = []
     for row in data:
@@ -89,6 +93,7 @@ def player_data(request):
 
 
 def player_runs_graph(request):
+    """returns json data required for plot"""
     try:
         if request.method == "POST":
             data = json.loads(request.body.decode("utf-8"))
@@ -98,23 +103,23 @@ def player_runs_graph(request):
             if players:
                 data = (
                     Delivery.objects.values("batsman")
-                        .filter(
-                        batting_team="Royal_Challengers_Bangalore", batsman__in=players
+                    .filter(
+                        batting_team="Royal_Challengers_Bangalore",
+                        batsman__in=players
                     )
-                        .annotate(total_runs=Sum("total_runs"))
-                        .filter(
-                        total_runs__gte=int(start[0]),
-                        total_runs__lte=int(end[0])
-                    )
-                        .order_by("batsman")
+                    .annotate(total_runs=Sum("total_runs"))
+                    .filter(total_runs__gte=int(start[0]),
+                            total_runs__lte=int(end[0]))
+                    .order_by("batsman")
                 )
             else:
                 data = (
                     Delivery.objects.values("batsman")
-                        .filter(batting_team="Royal_Challengers_Bangalore")
-                        .annotate(total_runs=Sum("total_runs"))
-                        .filter(total_runs__gte=int(start[0]), total_runs__lte=int(end[0]))
-                        .order_by("batsman")
+                    .filter(batting_team="Royal_Challengers_Bangalore")
+                    .annotate(total_runs=Sum("total_runs"))
+                    .filter(total_runs__gte=int(start[0]),
+                            total_runs__lte=int(end[0]))
+                    .order_by("batsman")
                 )
             sol_dict = {}
             for row in data:
@@ -126,6 +131,7 @@ def player_runs_graph(request):
 
 
 def umpire_nationality(request):
+    """renders html page for umpires vs nationality"""
     try:
         return render(request, "ipl_solution/sol3.html")
     except Exception as e:
@@ -133,12 +139,13 @@ def umpire_nationality(request):
 
 
 def umpire_data(request):
+    """returns json data for umpires vs nationality"""
     try:
         data = (
             Umpire.objects.values("nationality")
-                .exclude(nationality="India")
-                .annotate(total_umpires=Count("umpire"))
-                .order_by("nationality")
+            .exclude(nationality="India")
+            .annotate(total_umpires=Count("umpire"))
+            .order_by("nationality")
         )
         sol_dict = {}
         nations = []
@@ -156,6 +163,7 @@ def umpire_data(request):
 
 
 def umpire_nation_graph(request):
+    """returns required json data for plot"""
     try:
         if request.method == "POST":
             data = json.loads(request.body.decode("utf-8"))
@@ -163,17 +171,17 @@ def umpire_nation_graph(request):
             if nations:
                 filtered_data = (
                     Umpire.objects.values("nationality")
-                        .exclude(nationality="India")
-                        .filter(nationality__in=nations)
-                        .annotate(total_umpires=Count("umpire"))
-                        .order_by("total_umpires")
+                    .exclude(nationality="India")
+                    .filter(nationality__in=nations)
+                    .annotate(total_umpires=Count("umpire"))
+                    .order_by("total_umpires")
                 )
             else:
                 filtered_data = (
                     Umpire.objects.values("nationality")
-                        .exclude(nationality="India")
-                        .annotate(total_umpires=Count("umpire"))
-                        .order_by("total_umpires")
+                    .exclude(nationality="India")
+                    .annotate(total_umpires=Count("umpire"))
+                    .order_by("total_umpires")
                 )
 
             sol_dict = {}
@@ -187,6 +195,7 @@ def umpire_nation_graph(request):
 
 
 def matches_teams_season(request):
+    """renders html page for number of matches by teams by season"""
     try:
         return render(request, "ipl_solution/sol4.html")
     except Exception as e:
@@ -194,11 +203,12 @@ def matches_teams_season(request):
 
 
 def match_team_season_data(request):
+    """returns json data for number of matches by teams by season"""
     try:
         data = (
             Match.objects.values("team1", "season")
-                .annotate(total_matches=Count("team1"))
-                .order_by("season")
+            .annotate(total_matches=Count("team1"))
+            .order_by("season")
         )
         sol_dict = {}
         for row in data:
@@ -214,6 +224,7 @@ def match_team_season_data(request):
 
 
 def match_team_season_graph(request):
+    """returns json data required for the plot"""
     try:
         if request.method == "POST":
             data = json.loads(request.body.decode("utf-8"))
@@ -222,30 +233,32 @@ def match_team_season_graph(request):
             if seasons:
                 filtered_data = (
                     Match.objects.values("team1", "season")
-                        .filter(season__in=seasons)
-                        .annotate(total_matches=Count("team1"))
-                        .order_by("season")
+                    .filter(season__in=seasons)
+                    .annotate(total_matches=Count("team1"))
+                    .order_by("season")
                 )
             elif teams:
                 filtered_data = (
                     Match.objects.values("team1", "season")
-                        .filter(team1__in=teams)
-                        .annotate(total_matches=Count("team1"))
-                        .order_by("season")
+                    .filter(team1__in=teams)
+                    .annotate(total_matches=Count("team1"))
+                    .order_by("season")
                 )
             else:
                 filtered_data = (
                     Match.objects.values("team1", "season")
-                        .annotate(total_matches=Count("team1"))
-                        .order_by("season")
+                    .annotate(total_matches=Count("team1"))
+                    .order_by("season")
                 )
             sol_dict = {}
             for row in filtered_data:
                 if row["season"] in sol_dict:
-                    sol_dict[row["season"]][row["team1"]] = row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] \
+                        = row["total_matches"]
                 else:
                     sol_dict[row["season"]] = {}
-                    sol_dict[row["season"]][row["team1"]] = row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] \
+                        = row["total_matches"]
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
