@@ -3,51 +3,38 @@
   <br />
   <div class="container">
     <div class="row">
-      <h3>Choose Players</h3>
+      <h3>Choose seasons</h3>
       <form action="">
         <select
           name="players"
           class="form-control select-checkbox"
           size="5"
-          id="players"
+          id="seasons"
           multiple
         >
           <script>
-            populateDropdown("players");
+            populateDropdown4("seasons");
           </script>
         </select>
         <br /><br />
       </form>
-      <h3>Choose range of total runs</h3>
+      <h3>Choose teams</h3>
       <form action="">
-        <h4>choose start</h4>
         <select
-          name="runs"
+          name="teams"
           class="form-control select-checkbox"
           size="5"
-          id="start"
-        >
-        <option value="0" selected="selected">0</option>
-          <script>
-            populateDropdown2("start");
-          </script>
-        </select>
-        <h4>choose end</h4>
-        <select
-          name="runs"
-          class="form-control select-checkbox"
-          size="5"
-          id="end"
+          id="teams"
+          multiple
         >
           <script>
-            populateDropdown2("end");
+            populateDropdown5("teams");
           </script>
-          <option value="5000" selected="selected">5000</option>
         </select>
         <br /><br />
       </form>
     </div>
-    <button id="submit" onclick="plotGraphs2('players','start','end');">
+    <button id="submit" onclick="plotGraphs4('seasons','teams');">
       Show graph
     </button>
     <div id="container"></div>

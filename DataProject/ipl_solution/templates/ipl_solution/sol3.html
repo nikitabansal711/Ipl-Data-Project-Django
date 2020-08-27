@@ -1,0 +1,26 @@
+{% extends "ipl_solution/base.html" %} {% block content %}
+<div class="row text-center">
+  <br />
+  <div class="container">
+    <div class="row">
+      <h3>Choose nations</h3>
+      <form action="">
+        <select
+          name="players"
+          class="form-control select-checkbox"
+          size="5"
+          id="nations"
+          multiple
+        >
+          <script>
+            populateDropdown3("nations");
+          </script>
+        </select>
+        <br /><br />
+      </form>
+    </div>
+    <button id="submit" onclick="plotGraphs3('nations');">Show graph</button>
+    <div id="container"></div>
+  </div>
+</div>
+{% endblock %}

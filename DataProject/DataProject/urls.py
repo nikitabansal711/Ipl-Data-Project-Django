@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
+from ipl_solution import views as ipl
 
 urlpatterns = [
+    path("", ipl.teams_runs, name="teams_runs"),
     path('admin/', admin.site.urls),
     path('ipl/', include('ipl_solution.urls')),
     url(r'^ht/', include('health_check.urls')),
