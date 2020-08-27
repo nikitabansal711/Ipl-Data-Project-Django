@@ -45,8 +45,8 @@ def teams_runs_graph(request):
                     .filter(batting_team__in=teams)
                     .annotate(total_runs=Sum("total_runs"))
                     .filter(
-                        total_runs__gte=int(start[0] or 0),
-                        total_runs__lte=int(end[0]) or 30000,
+                        total_runs__gte=int(start[0]),
+                        total_runs__lte=int(end[0])
                     )
                     .order_by("total_runs")
                 )
@@ -54,10 +54,6 @@ def teams_runs_graph(request):
                 filtered_data = (
                     Delivery.objects.values("batting_team")
                     .annotate(total_runs=Sum("total_runs"))
-                    .filter(
-                        total_runs__gte=int(start[0] or 0),
-                        total_runs__lte=int(end[0]) or 30000,
-                    )
                     .order_by("total_runs")
                 )
             sol_dict = {}
@@ -119,8 +115,6 @@ def player_runs_graph(request):
                     Delivery.objects.values("batsman")
                     .filter(batting_team="Royal_Challengers_Bangalore")
                     .annotate(total_runs=Sum("total_runs"))
-                    .filter(total_runs__gte=int(start[0]),
-                            total_runs__lte=int(end[0]))
                     .order_by("total_runs")
                 )
             sol_dict = {}
