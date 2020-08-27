@@ -43,7 +43,7 @@
   
 >### Apply migrations:
 * ```python manage.py migrate```
->### Run the management command
+>### Run the management command to load csv data into database
 * ```python manage.py dataLoader```
 
 >### Run the server
