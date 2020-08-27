@@ -43,22 +43,26 @@ def teams_runs_graph(request):
                 filtered_data = (
                     Delivery.objects.values("batting_team")
                     .filter(batting_team__in=teams)
-                    .annotate(total_runs=Sum("total_runs"))
+                    .annotate(total_run=Sum("total_runs"))
                     .filter(
-                        total_runs__gte=int(start[0]),
-                        total_runs__lte=int(end[0])
+                        total_run__gte=int(start[0]),
+                        total_run__lte=int(end[0])
                     )
-                    .order_by("total_runs")
+                    .order_by("total_run")
                 )
             else:
                 filtered_data = (
                     Delivery.objects.values("batting_team")
-                    .annotate(total_runs=Sum("total_runs"))
-                    .order_by("total_runs")
+                    .annotate(total_run=Sum("total_runs"))
+                    .filter(
+                        total_run__gte=int(start[0]),
+                        total_run__lte=int(end[0])
+                    )
+                    .order_by("total_run")
                 )
             sol_dict = {}
             for row in filtered_data:
-                sol_dict[row["batting_team"]] = row["total_runs"]
+                sol_dict[row["batting_team"]] = row["total_run"]
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
@@ -105,21 +109,23 @@ def player_runs_graph(request):
                         batting_team="Royal_Challengers_Bangalore",
                         batsman__in=players
                     )
-                    .annotate(total_runs=Sum("total_runs"))
-                    .filter(total_runs__gte=int(start[0]),
-                            total_runs__lte=int(end[0]))
-                    .order_by("total_runs")
+                    .annotate(total_run=Sum("total_runs"))
+                    .filter(total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0]))
+                    .order_by("total_run")
                 )
             else:
                 data = (
                     Delivery.objects.values("batsman")
                     .filter(batting_team="Royal_Challengers_Bangalore")
-                    .annotate(total_runs=Sum("total_runs"))
-                    .order_by("total_runs")
+                    .annotate(total_run=Sum("total_runs"))
+                    .filter(total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0]))
+                    .order_by("total_run")
                 )
             sol_dict = {}
             for row in data:
-                sol_dict[row["batsman"]] = row["total_runs"]
+                sol_dict[row["batsman"]] = row["total_run"]
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
