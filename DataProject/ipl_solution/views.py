@@ -89,7 +89,6 @@ def player_data(request):
         sol_dict = []
         for row in data:
             sol_dict.append(row["batsman"])
-        print(sol_dict)
         return JsonResponse({"data": sol_dict})
     except Exception as e:
         logger.error(e)
@@ -146,7 +145,6 @@ def umpire_data(request):
     try:
         data = (
             Umpire.objects.values("nationality")
-            .exclude(nationality="India")
             .annotate(total_umpires=Count("umpire"))
             .order_by("nationality")
         )
@@ -158,7 +156,6 @@ def umpire_data(request):
             number_of_umpires.append(row["total_umpires"])
         sol_dict["nations"] = nations
         sol_dict["number_of_umpires"] = number_of_umpires
-        print(sol_dict)
         return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
@@ -174,7 +171,6 @@ def umpire_nation_graph(request):
             if nations:
                 filtered_data = (
                     Umpire.objects.values("nationality")
-                    .exclude(nationality="India")
                     .filter(nationality__in=nations)
                     .annotate(total_umpires=Count("umpire"))
                     .order_by("total_umpires")
@@ -182,7 +178,7 @@ def umpire_nation_graph(request):
             else:
                 filtered_data = (
                     Umpire.objects.values("nationality")
-                    .exclude(nationality="India")
+                    .exclude(nationality='India')
                     .annotate(total_umpires=Count("umpire"))
                     .order_by("total_umpires")
                 )
@@ -190,7 +186,6 @@ def umpire_nation_graph(request):
             sol_dict = {}
             for row in filtered_data:
                 sol_dict[row["nationality"]] = row["total_umpires"]
-            print(sol_dict)
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
