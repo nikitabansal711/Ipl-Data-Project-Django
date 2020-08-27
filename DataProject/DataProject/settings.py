@@ -36,9 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipl_solution',
-    'import_export',
-    'health_check',
-    'health_check.db',  # stock Django health checkers
 ]
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 

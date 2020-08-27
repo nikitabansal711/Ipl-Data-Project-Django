@@ -22,5 +22,4 @@ urlpatterns = [
     path("", ipl.teams_runs, name="teams_runs"),
     path('admin/', admin.site.urls),
     path('ipl/', include('ipl_solution.urls')),
-    url(r'^ht/', include('health_check.urls')),
 ]
