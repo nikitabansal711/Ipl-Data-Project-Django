@@ -178,7 +178,7 @@ def umpire_nation_graph(request):
             else:
                 filtered_data = (
                     Umpire.objects.values("nationality")
-                    .exclude(nationality='India')
+                    .exclude(nationality="India")
                     .annotate(total_umpires=Count("umpire"))
                     .order_by("total_umpires")
                 )
@@ -231,10 +231,9 @@ def match_team_season_graph(request):
             if seasons and teams:
                 filtered_data = (
                     Match.objects.values("team1", "season")
-                        .filter(season__in=seasons,
-                                team1__in=teams)
-                        .annotate(total_matches=Count("team1"))
-                        .order_by("season")
+                    .filter(season__in=seasons, team1__in=teams)
+                    .annotate(total_matches=Count("team1"))
+                    .order_by("season")
                 )
             elif seasons or teams:
                 if seasons:
@@ -243,13 +242,13 @@ def match_team_season_graph(request):
                         .filter(season__in=seasons)
                         .annotate(total_matches=Count("team1"))
                         .order_by("season")
-                        )
+                    )
                 if teams:
                     filtered_data = (
                         Match.objects.values("team1", "season")
-                            .filter(team1__in=teams)
-                            .annotate(total_matches=Count("team1"))
-                            .order_by("season")
+                        .filter(team1__in=teams)
+                        .annotate(total_matches=Count("team1"))
+                        .order_by("season")
                     )
             else:
                 filtered_data = (
@@ -260,12 +259,12 @@ def match_team_season_graph(request):
             sol_dict = {}
             for row in filtered_data:
                 if row["season"] in sol_dict:
-                    sol_dict[row["season"]][row["team1"]] \
-                        = row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] = \
+                        row["total_matches"]
                 else:
                     sol_dict[row["season"]] = {}
-                    sol_dict[row["season"]][row["team1"]] \
-                        = row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] =\
+                        row["total_matches"]
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:
