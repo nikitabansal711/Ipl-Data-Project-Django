@@ -84,7 +84,7 @@ def player_data(request):
             Delivery.objects.values("batsman")
             .filter(batting_team="Royal_Challengers_Bangalore")
             .annotate(total_runs=Sum("total_runs"))
-            .order_by("batsman")
+            .order_by("total_runs")
         )
         sol_dict = []
         for row in data:
@@ -112,7 +112,7 @@ def player_runs_graph(request):
                     .annotate(total_runs=Sum("total_runs"))
                     .filter(total_runs__gte=int(start[0]),
                             total_runs__lte=int(end[0]))
-                    .order_by("batsman")
+                    .order_by("total_runs")
                 )
             else:
                 data = (
@@ -121,7 +121,7 @@ def player_runs_graph(request):
                     .annotate(total_runs=Sum("total_runs"))
                     .filter(total_runs__gte=int(start[0]),
                             total_runs__lte=int(end[0]))
-                    .order_by("batsman")
+                    .order_by("total_runs")
                 )
             sol_dict = {}
             for row in data:

@@ -39,10 +39,15 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav">
             <li class="active">
-              <a href="{% url 'ipl:player_runs' %}"> Player vs Runs </a>
+              <a href="{% url 'ipl:teams_runs' %}"> Teams vs Runs </a>
             </li>
             <li>
-              <a href="{% url 'ipl:umpire_nationality' %}"> Umpires vs nationality </a>
+              <a href="{% url 'ipl:player_runs' %}"> Players vs Runs </a>
+            </li>
+            <li>
+              <a href="{% url 'ipl:umpire_nationality' %}">
+                Umpires vs nationality
+              </a>
             </li>
             <li>
               <a href="{% url 'ipl:matches_teams_season' %}">
