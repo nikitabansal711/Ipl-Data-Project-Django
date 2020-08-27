@@ -9,6 +9,11 @@ h3 {
 h4 {
   color: whitesmoke;
 }
+.fav {
+  background-color: #98fb98;
+  color: black;
+  font-weight: bolder;
+}
 #container {
   height: 800px;
   background-color: black;
