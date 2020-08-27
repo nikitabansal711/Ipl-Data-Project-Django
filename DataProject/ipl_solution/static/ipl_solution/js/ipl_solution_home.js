@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+// function to get cookie
 function getCookie(name) {
   var cookieValue = null;
   if (document.cookie && document.cookie !== "") {
@@ -15,7 +16,7 @@ function getCookie(name) {
   }
   return cookieValue;
 }
-
+// helper function to populate dropdown list
 function helper_populateDropdown(select, options) {
   for (var i = 0; i < options.length; i++) {
     var opt = options[i];
@@ -26,6 +27,7 @@ function helper_populateDropdown(select, options) {
   }
 }
 
+// function to populate dropdown
 function populateDropdown(fieldID) {
   var select = document.getElementById(fieldID);
   fetch("http://127.0.0.1:8000/ipl/player-data/")
@@ -36,6 +38,7 @@ function populateDropdown(fieldID) {
     });
 }
 
+// function to populate dropdown
 function populateDropdown2(fieldID) {
   var select = document.getElementById(fieldID);
   for (var i = 1; i < 5000; i++) {
@@ -47,6 +50,7 @@ function populateDropdown2(fieldID) {
   }
 }
 
+// function to populate dropdown
 function populateDropdown3(fieldID) {
   var select = document.getElementById(fieldID);
   fetch("http://127.0.0.1:8000/ipl/umpire-data/")
@@ -58,6 +62,7 @@ function populateDropdown3(fieldID) {
     });
 }
 
+// function to populate dropdown
 function populateDropdown4(fieldID) {
   var select = document.getElementById(fieldID);
   fetch("http://127.0.0.1:8000/ipl/match-team-season-data/")
@@ -69,6 +74,7 @@ function populateDropdown4(fieldID) {
     });
 }
 
+// function to populate dropdown
 function populateDropdown5(fieldID) {
   var select = document.getElementById(fieldID);
   fetch("http://127.0.0.1:8000/ipl/teams-runs-data/")
@@ -79,6 +85,7 @@ function populateDropdown5(fieldID) {
     });
 }
 
+// function to get multiple selected values
 function getMultipleSelected(fieldID) {
   var elements = document.getElementById(fieldID).childNodes;
   var selectedKeyValue = {};
@@ -92,6 +99,7 @@ function getMultipleSelected(fieldID) {
   return arrayOfSelecedIDs;
 }
 
+// function to plot the bar graph
 function plotBarGraph(body, url, title_text, x_text, y_text, tootltip_text) {
   let csrftoken = getCookie("csrftoken");
   fetch(url, {
@@ -160,7 +168,7 @@ function plotBarGraph(body, url, title_text, x_text, y_text, tootltip_text) {
       });
     });
 }
-
+// function to plot graph teams vs runs
 function plotGraphs1(fieldID1, fieldID2, fieldID3) {
   teams = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
@@ -174,6 +182,7 @@ function plotGraphs1(fieldID1, fieldID2, fieldID3) {
   plotBarGraph(body, url, "Teams vs total runs", "Teams", "Runs", "Total runs");
 }
 
+// function to plot graph players vs runs
 function plotGraphs2(fieldID1, fieldID2, fieldID3) {
   players = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
@@ -187,6 +196,7 @@ function plotGraphs2(fieldID1, fieldID2, fieldID3) {
   plotBarGraph(body, url, "Players vs runs", "Players", "Runs", "Total runs");
 }
 
+// function to plot graph umpires vs nationality
 function plotGraphs3(fieldID1) {
   nations = getMultipleSelected(fieldID1);
   var url = "http://127.0.0.1:8000/ipl/umpire-nation-graph/";
@@ -203,6 +213,7 @@ function plotGraphs3(fieldID1) {
   );
 }
 
+// function to plot graph number of matches by teams by season
 function plotGraphs4(fieldID1, fieldID2) {
   seasons = getMultipleSelected(fieldID1);
   teams = getMultipleSelected(fieldID2);
