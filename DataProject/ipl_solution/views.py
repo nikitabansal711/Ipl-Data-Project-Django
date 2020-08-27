@@ -1,9 +1,9 @@
 import json
-from django.shortcuts import render
-from django.http import JsonResponse
-from .models import Delivery, Match, Umpire
 from django.db.models import Sum, Count
+from django.http import JsonResponse
+from django.shortcuts import render
 from .config import logger
+from .models import Delivery, Match, Umpire
 
 
 def teams_runs(request):
@@ -79,17 +79,20 @@ def player_runs(request):
 
 def player_data(request):
     """returns json data for players vs runs"""
-    data = (
-        Delivery.objects.values("batsman")
-        .filter(batting_team="Royal_Challengers_Bangalore")
-        .annotate(total_runs=Sum("total_runs"))
-        .order_by("batsman")
-    )
-    sol_dict = []
-    for row in data:
-        sol_dict.append(row["batsman"])
-    print(sol_dict)
-    return JsonResponse({"data": sol_dict})
+    try:
+        data = (
+            Delivery.objects.values("batsman")
+            .filter(batting_team="Royal_Challengers_Bangalore")
+            .annotate(total_runs=Sum("total_runs"))
+            .order_by("batsman")
+        )
+        sol_dict = []
+        for row in data:
+            sol_dict.append(row["batsman"])
+        print(sol_dict)
+        return JsonResponse({"data": sol_dict})
+    except Exception as e:
+        logger.error(e)
 
 
 def player_runs_graph(request):
