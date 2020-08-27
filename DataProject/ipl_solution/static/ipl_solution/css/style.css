@@ -1,9 +1,17 @@
 body {
   margin-left: 0;
   margin-right: 0;
+  background-color: black;
+}
+h3 {
+  color: whitesmoke;
+}
+h4 {
+  color: whitesmoke;
 }
 #container {
   height: 800px;
+  background-color: black;
 }
 
 .highcharts-figure,
@@ -83,4 +91,16 @@ select {
 .select-checkbox-fa option:checked::before {
   content: "\f046";
 }
-
+.style-footer {
+  width: 100%;
+  height: fit-content;
+  max-width: top 10px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: whitesmoke;
+  text-align: center;
+  position: relative;
+  margin-top: 40px;
+}
