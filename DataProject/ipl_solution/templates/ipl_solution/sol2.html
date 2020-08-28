@@ -22,35 +22,41 @@
       </form>
       <h3>Choose range of total runs</h3>
       <form action="">
-        <h4>choose start</h4>
-        <select
-          name="runs"
-          class="form-control select-checkbox fav"
-          data="tooltip"
-          title="Select the start value of total runs range"
-          size="5"
-          id="start"
-        >
-          <option value="0" selected="selected">0</option>
-          <script>
-            populateDropdown2("start");
-          </script>
-        </select>
-        <h4>choose end</h4>
-        <select
-          name="runs"
-          class="form-control select-checkbox fav"
-          data="tooltip"
-          title="Select the end value of total runs range"
-          size="5"
-          id="end"
-        >
-          <script>
-            populateDropdown2("end");
-          </script>
-          <option value="5000" selected="selected">5000</option>
-        </select>
-        <br />
+        <div class="flex_box">
+          <div>
+            <h4>choose start</h4>
+            <select
+              name="runs"
+              class="form-control select-checkbox fav"
+              data="tooltip"
+              title="Select the start value of total runs range"
+              size="5"
+              id="start"
+            >
+              <option value="0" selected="selected">0</option>
+              <script>
+                populateDropdown2("start");
+              </script>
+            </select>
+          </div>
+          <div>
+            <h4>choose end</h4>
+            <select
+              name="runs"
+              class="form-control select-checkbox fav"
+              data="tooltip"
+              title="Select the end value of total runs range"
+              size="5"
+              id="end"
+            >
+              <script>
+                populateDropdown2("end");
+              </script>
+              <option value="5000" selected="selected">5000</option>
+            </select>
+          </div>
+          <br />
+        </div>
       </form>
     </div>
     <button

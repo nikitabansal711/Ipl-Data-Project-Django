@@ -3,40 +3,46 @@
   <br />
   <div class="container">
     <div class="row">
-      <h3>Choose seasons</h3>
-      <form action="">
-        <select
-          name="players"
-          data="tooltip"
-          title="Press and hold ctrl for multiple select"
-          class="form-control select-checkbox fav"
-          size="5"
-          id="seasons"
-          multiple
-        >
-          <script>
-            populateDropdown4("seasons");
-          </script>
-        </select>
-        <br />
-      </form>
-      <h3>Choose teams</h3>
-      <form action="">
-        <select
-          name="teams"
-          data="tooltip"
-          title="Press and hold ctrl for multiple select"
-          class="form-control select-checkbox fav"
-          size="5"
-          id="teams"
-          multiple
-        >
-          <script>
-            populateDropdown5("teams");
-          </script>
-        </select>
-        <br />
-      </form>
+      <div class="flex_box">
+        <div>
+          <h3>Choose seasons</h3>
+          <form action="">
+            <select
+              name="players"
+              data="tooltip"
+              title="Press and hold ctrl for multiple select"
+              class="form-control select-checkbox fav"
+              size="5"
+              id="seasons"
+              multiple
+            >
+              <script>
+                populateDropdown4("seasons");
+              </script>
+            </select>
+            <br />
+          </form>
+        </div>
+        <div>
+          <h3>Choose teams</h3>
+          <form action="">
+            <select
+              name="teams"
+              data="tooltip"
+              title="Press and hold ctrl for multiple select"
+              class="form-control select-checkbox fav"
+              size="5"
+              id="teams"
+              multiple
+            >
+              <script>
+                populateDropdown5("teams");
+              </script>
+            </select>
+            <br />
+          </form>
+        </div>
+      </div>
     </div>
     <button
       id="submit"
