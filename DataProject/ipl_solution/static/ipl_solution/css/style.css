@@ -12,7 +12,7 @@ h4 {
   font-family: "Lobster", cursive;
 }
 .fav {
-  background-color:#E6E6FA;
+  background-color: #e6e6fa;
   box-shadow: 5px 10px #708090;
   color: black;
   font-weight: bolder;
@@ -79,7 +79,7 @@ select {
   width: 150px;
 }
 select:hover {
-  background-color:#F5FFFA;
+  background-color: #f5fffa;
   transform: translate3d(0px, -1px, 0px);
   margin-top: -1px;
 }
@@ -122,9 +122,13 @@ select:hover {
   font-weight: bolder;
   font-family: "Lobster", cursive;
 }
-.flex_box{
+.flex_box {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 10px;
   margin-bottom: 15px;
+}
+.main_grid {
+  display: grid;
+  grid-template-columns: 30% 70%;
 }

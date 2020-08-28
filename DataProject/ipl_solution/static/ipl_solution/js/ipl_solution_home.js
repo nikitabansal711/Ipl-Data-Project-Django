@@ -295,6 +295,9 @@ function plotGraphs4(fieldID1, fieldID2) {
           text: "Number of matches played by teams by season",
         },
         xAxis: {
+          title: {
+            text: "Seasons",
+          },
           categories: seasons,
         },
         yAxis: {
@@ -313,18 +316,6 @@ function plotGraphs4(fieldID1, fieldID2) {
                 "gray",
             },
           },
-        },
-        legend: {
-          align: "right",
-          x: -30,
-          verticalAlign: "top",
-          y: 25,
-          floating: true,
-          backgroundColor:
-            Highcharts.defaultOptions.legend.backgroundColor || "white",
-          borderColor: "#CCC",
-          borderWidth: 1,
-          shadow: false,
         },
         tooltip: {
           headerFormat: "<b>{point.x}</b><br/>",

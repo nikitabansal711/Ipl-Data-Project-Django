@@ -20,7 +20,7 @@ def teams_runs_data(request):
         data = (
             Delivery.objects.values("batting_team")
             .annotate(total_runs=Sum("total_runs"))
-            .order_by("total_runs")
+            .order_by("batting_team")
         )
         teams = []
         for row in data:

@@ -2,75 +2,80 @@
 <div class="row text-center">
   <br />
   <div class="container">
-    <div class="row">
-      <h3>Choose teams</h3>
-      <form action="">
-        <select
-          name="teams"
-          data="tooltip"
-          title="Press and hold ctrl for multiple select"
-          class="form-control select-checkbox fav"
-          size="5"
-          id="teams"
-          multiple
-        >
-          <script>
-            populateDropdown5("teams");
-          </script>
-        </select>
-        <br />
-      </form>
-      <h3>Choose range of total runs</h3>
-      <form action="">
-        <div class="flex_box">
-          <div>
-            <h4>choose start</h4>
-            <select
-              name="runs"
-              class="form-control select-checkbox fav"
-              data="tooltip"
-              title="Select the start value of total runs range"
-              size="5"
-              id="start"
-            >
-              <option value="0" selected="selected">0</option>
-              <option value="5000">5000</option>
-              <option value="10000">10000</option>
-              <option value="15000">15000</option>
-              <option value="20000">20000</option>
-              <option value="25000">25000</option>
-            </select>
-          </div>
-          <div>
-            <h4>choose end</h4>
-            <select
-              name="runs"
-              class="form-control select-checkbox fav"
-              data="tooltip"
-              title="Select the end value of total runs range"
-              size="5"
-              id="end"
-            >
-              <option value="5000">5000</option>
-              <option value="10000">10000</option>
-              <option value="15000">15000</option>
-              <option value="20000">20000</option>
-              <option value="25000">25000</option>
-              <option value="30000" selected="selected">30000</option>
-            </select>
-          </div>
-          <br />
-        </div>
-      </form>
-    </div>
-    <button
-      id="submit"
-      class="btn btn-success"
-      onclick="plotGraphs1('teams','start','end');"
+    <div
+      class="main_grid"
+      style="display: grid; grid-template-columns: 30% 70%;"
     >
-      Show graph
-    </button>
-    <div id="container"></div>
+      <div>
+        <h3>Choose teams</h3>
+        <form action="">
+          <select
+            name="teams"
+            data="tooltip"
+            title="Press and hold ctrl for multiple select"
+            class="form-control select-checkbox fav"
+            size="5"
+            id="teams"
+            multiple
+          >
+            <script>
+              populateDropdown5("teams");
+            </script>
+          </select>
+          <br />
+        </form>
+        <h3>Choose range of total runs</h3>
+        <form action="">
+          <div class="flex_box">
+            <div>
+              <h4>choose start</h4>
+              <select
+                name="runs"
+                class="form-control select-checkbox fav"
+                data="tooltip"
+                title="Select the start value of total runs range"
+                size="5"
+                id="start"
+              >
+                <option value="0" selected="selected">0</option>
+                <option value="5000">5000</option>
+                <option value="10000">10000</option>
+                <option value="15000">15000</option>
+                <option value="20000">20000</option>
+                <option value="25000">25000</option>
+              </select>
+            </div>
+            <div>
+              <h4>choose end</h4>
+              <select
+                name="runs"
+                class="form-control select-checkbox fav"
+                data="tooltip"
+                title="Select the end value of total runs range"
+                size="5"
+                id="end"
+              >
+                <option value="5000">5000</option>
+                <option value="10000">10000</option>
+                <option value="15000">15000</option>
+                <option value="20000">20000</option>
+                <option value="25000">25000</option>
+                <option value="30000" selected="selected">30000</option>
+              </select>
+            </div>
+            <br />
+          </div>
+        </form>
+        <button
+          id="submit"
+          class="btn btn-success"
+          onclick="plotGraphs1('teams','start','end');"
+        >
+          Show graph
+        </button>
+      </div>
+      <div id="container"></div>
+    </div>
   </div>
 </div>
 {% endblock %}

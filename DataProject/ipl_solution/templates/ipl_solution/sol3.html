@@ -2,33 +2,35 @@
 <div class="row text-center">
   <br />
   <div class="container">
-    <div class="row">
-      <h3>Choose nations</h3>
-      <form action="">
-        <select
-          name="players"
-          class="form-control select-checkbox fav"
-          data="tooltip"
-          title="Press and hold ctrl for multiple select"
-          size="5"
-          id="nations"
-          multiple
+    <div class="main_grid">
+      <div>
+        <h3>Choose nations</h3>
+        <form action="">
+          <select
+            name="players"
+            class="form-control select-checkbox fav"
+            data="tooltip"
+            title="Press and hold ctrl for multiple select"
+            size="5"
+            id="nations"
+            multiple
+          >
+            <script>
+              populateDropdown3("nations");
+            </script>
+          </select>
+          <br />
+        </form>
+        <button
+          id="submit"
+          class="btn btn-success"
+          onclick="plotGraphs3('nations');"
         >
-          <script>
-            populateDropdown3("nations");
-          </script>
-        </select>
-        <br />
-      </form>
+          Show graph
+        </button>
+      </div>
+      <div id="container"></div>
     </div>
-    <button
-      id="submit"
-      class="btn btn-success"
-      onclick="plotGraphs3('nations');"
-    >
-      Show graph
-    </button>
-    <div id="container"></div>
   </div>
 </div>
 {% endblock %}

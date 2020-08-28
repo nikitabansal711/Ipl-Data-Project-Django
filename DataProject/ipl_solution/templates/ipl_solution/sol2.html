@@ -2,71 +2,73 @@
 <div class="row text-center">
   <br />
   <div class="container">
-    <div class="row">
-      <h3>Choose Players</h3>
-      <form action="">
-        <select
-          name="players"
-          data-toggle="tooltip"
-          title="Press and hold ctrl for multiple select"
-          class="form-control select-checkbox fav"
-          size="5"
-          id="players"
-          multiple
-        >
-          <script>
-            populateDropdown("players");
-          </script>
-        </select>
-        <br />
-      </form>
-      <h3>Choose range of total runs</h3>
-      <form action="">
-        <div class="flex_box">
-          <div>
-            <h4>choose start</h4>
-            <select
-              name="runs"
-              class="form-control select-checkbox fav"
-              data="tooltip"
-              title="Select the start value of total runs range"
-              size="5"
-              id="start"
-            >
-              <option value="0" selected="selected">0</option>
-              <script>
-                populateDropdown2("start");
-              </script>
-            </select>
-          </div>
-          <div>
-            <h4>choose end</h4>
-            <select
-              name="runs"
-              class="form-control select-checkbox fav"
-              data="tooltip"
-              title="Select the end value of total runs range"
-              size="5"
-              id="end"
-            >
-              <script>
-                populateDropdown2("end");
-              </script>
-              <option value="5000" selected="selected">5000</option>
-            </select>
-          </div>
+    <div class="main_grid">
+      <div>
+        <h3>Choose Players</h3>
+        <form action="">
+          <select
+            name="players"
+            data-toggle="tooltip"
+            title="Press and hold ctrl for multiple select"
+            class="form-control select-checkbox fav"
+            size="5"
+            id="players"
+            multiple
+          >
+            <script>
+              populateDropdown("players");
+            </script>
+          </select>
           <br />
-        </div>
-      </form>
+        </form>
+        <h3>Choose range of total runs</h3>
+        <form action="">
+          <div class="flex_box">
+            <div>
+              <h4>choose start</h4>
+              <select
+                name="runs"
+                class="form-control select-checkbox fav"
+                data="tooltip"
+                title="Select the start value of total runs range"
+                size="5"
+                id="start"
+              >
+                <option value="0" selected="selected">0</option>
+                <script>
+                  populateDropdown2("start");
+                </script>
+              </select>
+            </div>
+            <div>
+              <h4>choose end</h4>
+              <select
+                name="runs"
+                class="form-control select-checkbox fav"
+                data="tooltip"
+                title="Select the end value of total runs range"
+                size="5"
+                id="end"
+              >
+                <script>
+                  populateDropdown2("end");
+                </script>
+                <option value="5000" selected="selected">5000</option>
+              </select>
+            </div>
+            <br />
+          </div>
+        </form>
+        <button
+          id="submit"
+          class="btn btn-success"
+          onclick="plotGraphs2('players','start','end');"
+        >
+          Show graph
+        </button>
+      </div>
+      <div id="container"></div>
     </div>
-    <button
-      id="submit"
-      class="btn btn-success"
-      onclick="plotGraphs2('players','start','end');"
-    >
-      Show graph
-    </button>
-    <div id="container"></div>
   </div>
 </div>
 {% endblock %}
