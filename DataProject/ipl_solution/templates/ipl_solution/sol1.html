@@ -1,11 +1,8 @@
 {% extends "ipl_solution/base.html" %} {% block content %}
 <div class="row text-center">
   <br />
-  <div class="container">
-    <div
-      class="main_grid"
-      style="display: grid; grid-template-columns: 30% 70%;"
-    >
+  <div class="container-fluid">
+    <div class="main_grid">
       <div>
         <h3>Choose teams</h3>
         <form action="">
@@ -23,7 +20,9 @@
             </script>
           </select>
           <br />
+          <br />
         </form>
+        <hr />
         <h3>Choose range of total runs</h3>
         <form action="">
           <div class="flex_box">
@@ -63,13 +62,75 @@
                 <option value="30000" selected="selected">30000</option>
               </select>
             </div>
-            <br />
           </div>
         </form>
+        <a class="style-a" onclick="view('custom_range');">
+          <div id="custom_range">
+            <form>
+              <div class="flex_box">
+                <input
+                  type="number"
+                  id="custom_start"
+                  name="custom_start"
+                  placeholder="Enter start value"
+                  min="0"
+                  max="30000"
+                />
+                <input
+                  type="number"
+                  id="custom_end"
+                  name="custom_end"
+                  placeholder="Enter end value"
+                  min="0"
+                  max="30000"
+                />
+              </div>
+            </form>
+          </div>
+          Click to enter custom range
+        </a>
+        <br />
+        <br />
+        <hr />
+        <h3>Get top performing teams</h3>
+        <select
+          name="top"
+          class="form-control select-checkbox fav"
+          data="tooltip"
+          title="Select value to get top performers"
+          size="5"
+          id="top"
+        >
+          <option value="2">Get top 2 teams</option>
+          <option value="3">Get top 3 teams</option>
+          <option value="4">Get top 4 teams</option>
+          <option value="5">Get top 5 teams</option>
+        </select>
+        <br />
+        <a class="style-a" onclick="view('custom_top');">
+          <div id="custom_top">
+            <form>
+              <div class="flex_box_2">
+                <input
+                  type="number"
+                  id="custom_top_value"
+                  data="tooltip"
+                  title="Enter value to get top performers"
+                  min="0"
+                  max="30000"
+                />
+              </div>
+            </form>
+          </div>
+          Click to enter custom value
+        </a>
+        <br />
+        <br />
         <button
           id="submit"
           class="btn btn-success"
-          onclick="plotGraphs1('teams','start','end');"
+          onclick="plotGraphs1('teams','start','end',
+          'custom_start','custom_end','top','custom_top_value');"
         >
           Show graph
         </button>

@@ -20,7 +20,7 @@ def teams_runs_data(request):
         data = (
             Delivery.objects.values("batting_team")
             .annotate(total_runs=Sum("total_runs"))
-            .order_by("batting_team")
+            .order_by("batting_team" "")
         )
         teams = []
         for row in data:
@@ -39,26 +39,94 @@ def teams_runs_graph(request):
             teams = data["teams"]
             start = data["start"]
             end = data["end"]
+            custom_start = data["custom_start"]
+            custom_end = data["custom_end"]
+            custom_top = data["custom_top"]
+            custom_top_value = data["custom_top_value"]
             if teams:
+                if start or end:
+                    if custom_top or custom_top_value:
+                        filtered_data = (
+                            Delivery.objects.values("batting_team")
+                            .filter(batting_team__in=teams)
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=int(start[0]),
+                                total_run__lte=int(end[0])
+                            )
+                            .order_by("-total_run")[: custom_top or
+                                                    custom_top_value]
+                        )
+                    else:
+                        filtered_data = (
+                            Delivery.objects.values("batting_team")
+                            .filter(batting_team__in=teams)
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=int(start[0]),
+                                total_run__lte=int(end[0])
+                            )
+                            .order_by("-total_run")
+                        )
+                elif custom_start or custom_end:
+                    if custom_top or custom_top_value:
+                        filtered_data = (
+                            Delivery.objects.values("batting_team")
+                            .filter(batting_team__in=teams)
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=custom_start,
+                                total_run__lte=custom_end
+                            )
+                            .order_by("-total_run")[: custom_top or
+                                                    custom_top_value]
+                        )
+                    else:
+                        filtered_data = (
+                            Delivery.objects.values("batting_team")
+                            .filter(batting_team__in=teams)
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=custom_start,
+                                total_run__lte=custom_end
+                            )
+                            .order_by("-total_run")
+                        )
+            elif custom_start or custom_end:
+                if custom_top or custom_top_value:
+                    filtered_data = (
+                        Delivery.objects.values("batting_team")
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(total_run__gte=custom_start,
+                                total_run__lte=custom_end)
+                        .order_by("-total_run")[: custom_top or
+                                                custom_top_value]
+                    )
+                else:
+                    filtered_data = (
+                        Delivery.objects.values("batting_team")
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(total_run__gte=custom_start,
+                                total_run__lte=custom_end)
+                        .order_by("-total_run")
+                    )
+            elif custom_top or custom_top_value:
                 filtered_data = (
                     Delivery.objects.values("batting_team")
-                    .filter(batting_team__in=teams)
                     .annotate(total_run=Sum("total_runs"))
-                    .filter(
-                        total_run__gte=int(start[0]),
-                        total_run__lte=int(end[0])
-                    )
-                    .order_by("total_run")
+                    .filter(total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0]))
+                    .order_by("-total_run")[: custom_top or
+                                            custom_top_value]
                 )
+
             else:
                 filtered_data = (
                     Delivery.objects.values("batting_team")
                     .annotate(total_run=Sum("total_runs"))
-                    .filter(
-                        total_run__gte=int(start[0]),
-                        total_run__lte=int(end[0])
-                    )
-                    .order_by("total_run")
+                    .filter(total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0]))
+                    .order_by("-total_run")
                 )
             sol_dict = {}
             for row in filtered_data:
@@ -102,27 +170,118 @@ def player_runs_graph(request):
             players = data["players"]
             start = data["start"]
             end = data["end"]
+            custom_start = data["custom_start"]
+            custom_end = data["custom_end"]
+            custom_top = data["custom_top"]
+            custom_top_value = data["custom_top_value"]
             if players:
-                data = (
-                    Delivery.objects.values("batsman")
-                    .filter(
-                        batting_team="Royal_Challengers_Bangalore",
-                        batsman__in=players
+                if start or end:
+                    if custom_top or custom_top_value:
+                        data = (
+                            Delivery.objects.values("batsman")
+                            .filter(
+                                batting_team="Royal_Challengers_Bangalore",
+                                batsman__in=players,
+                            )
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=int(start[0]),
+                                total_run__lte=int(end[0])
+                            )
+                            .order_by("-total_run")[: custom_top or
+                                                    custom_top_value]
+                        )
+                    else:
+                        data = (
+                            Delivery.objects.values("batsman")
+                            .filter(
+                                batting_team="Royal_Challengers_Bangalore",
+                                batsman__in=players,
+                            )
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=int(start[0]),
+                                total_run__lte=int(end[0])
+                            )
+                            .order_by("-total_run")
+                        )
+
+                elif custom_start or custom_end:
+                    if custom_top or custom_top_value:
+                        data = (
+                            Delivery.objects.values("batsman")
+                            .filter(
+                                batting_team="Royal_Challengers_Bangalore",
+                                batsman__in=players,
+                            )
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=custom_start,
+                                total_run__lte=custom_end
+                            )
+                            .order_by("-total_run")[: custom_top or
+                                                    custom_top_value]
+                        )
+                    else:
+                        data = (
+                            Delivery.objects.values("batsman")
+                            .filter(
+                                batting_team="Royal_Challengers_Bangalore",
+                                batsman__in=players,
+                            )
+                            .annotate(total_run=Sum("total_runs"))
+                            .filter(
+                                total_run__gte=custom_start,
+                                total_run__lte=custom_end
+                            )
+                            .order_by("-total_run")
+                        )
+            elif custom_start or custom_end:
+                if custom_top or custom_top_value:
+                    data = (
+                        Delivery.objects.values("batsman")
+                        .filter(batting_team="Royal_Challengers_Bangalore",)
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(total_run__gte=custom_start,
+                                total_run__lte=custom_end)
+                        .order_by("-total_run")[: custom_top or
+                                                custom_top_value]
                     )
-                    .annotate(total_run=Sum("total_runs"))
-                    .filter(total_run__gte=int(start[0]),
-                            total_run__lte=int(end[0]))
-                    .order_by("total_run")
-                )
+
+                else:
+                    data = (
+                        Delivery.objects.values("batsman")
+                        .filter(batting_team="Royal_Challengers_Bangalore",)
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(total_run__gte=custom_start,
+                                total_run__lte=custom_end)
+                        .order_by("-total_run")
+                    )
+
             else:
-                data = (
-                    Delivery.objects.values("batsman")
-                    .filter(batting_team="Royal_Challengers_Bangalore")
-                    .annotate(total_run=Sum("total_runs"))
-                    .filter(total_run__gte=int(start[0]),
-                            total_run__lte=int(end[0]))
-                    .order_by("total_run")
-                )
+                if custom_top or custom_top_value:
+                    data = (
+                        Delivery.objects.values("batsman")
+                        .filter(batting_team="Royal_Challengers_Bangalore")
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(
+                            total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0])
+                        )
+                        .order_by("-total_run")[: custom_top or
+                                                custom_top_value]
+                    )
+                else:
+                    data = (
+                        Delivery.objects.values("batsman")
+                        .filter(batting_team="Royal_Challengers_Bangalore")
+                        .annotate(total_run=Sum("total_runs"))
+                        .filter(
+                            total_run__gte=int(start[0]),
+                            total_run__lte=int(end[0])
+                        )
+                        .order_by("-total_run")
+                    )
             sol_dict = {}
             for row in data:
                 sol_dict[row["batsman"]] = row["total_run"]
@@ -259,12 +418,10 @@ def match_team_season_graph(request):
             sol_dict = {}
             for row in filtered_data:
                 if row["season"] in sol_dict:
-                    sol_dict[row["season"]][row["team1"]] = \
-                        row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] = row["total_matches"]
                 else:
                     sol_dict[row["season"]] = {}
-                    sol_dict[row["season"]][row["team1"]] =\
-                        row["total_matches"]
+                    sol_dict[row["season"]][row["team1"]] = row["total_matches"]
             return JsonResponse({"data": json.dumps(sol_dict)})
 
     except Exception as e:

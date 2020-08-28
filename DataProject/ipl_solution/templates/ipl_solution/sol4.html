@@ -1,43 +1,43 @@
 {% extends "ipl_solution/base.html" %} {% block content %}
 <div class="row text-center">
   <br />
-  <div class="container">
+  <div class="container-fluid">
     <div class="main_grid">
       <div>
         <form>
-          <div class="flex_box">
-            <div>
-              <h3>Choose seasons</h3>
-              <select
-                name="players"
-                data="tooltip"
-                title="Press and hold ctrl for multiple select"
-                class="form-control select-checkbox fav"
-                size="5"
-                id="seasons"
-                multiple
-              >
-                <script>
-                  populateDropdown4("seasons");
-                </script>
-              </select>
-            </div>
-            <div>
-              <h3>Choose teams</h3>
-              <select
-                name="teams"
-                data="tooltip"
-                title="Press and hold ctrl for multiple select"
-                class="form-control select-checkbox fav"
-                size="5"
-                id="teams"
-                multiple
-              >
-                <script>
-                  populateDropdown5("teams");
-                </script>
-              </select>
-            </div>
+          <div>
+            <h3>Choose seasons</h3>
+            <select
+              name="players"
+              data="tooltip"
+              title="Press and hold ctrl for multiple select"
+              class="form-control select-checkbox fav"
+              size="5"
+              id="seasons"
+              multiple
+            >
+              <script>
+                populateDropdown4("seasons");
+              </script>
+            </select>
+          </div>
+          <br />
+          <hr />
+          <div>
+            <h3>Choose teams</h3>
+            <select
+              name="teams"
+              data="tooltip"
+              title="Press and hold ctrl for multiple select"
+              class="form-control select-checkbox fav"
+              size="5"
+              id="teams"
+              multiple
+            >
+              <script>
+                populateDropdown5("teams");
+              </script>
+            </select>
           </div>
         </form>
         <br />

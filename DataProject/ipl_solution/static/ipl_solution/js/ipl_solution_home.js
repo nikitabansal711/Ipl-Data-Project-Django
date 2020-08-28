@@ -1,6 +1,9 @@
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+function view(fieldID) {
+  document.getElementById(fieldID).setAttribute("style", "display:block");
+}
 // set hostname and port here
 var hostname = "http://127.0.0.1:8000/";
 // function to get cookie
@@ -43,7 +46,7 @@ function populateDropdown(fieldID) {
 // function to populate dropdown
 function populateDropdown2(fieldID) {
   var select = document.getElementById(fieldID);
-  for (var i = 1; i < 5000; i++) {
+  for (var i = 100; i < 5000; i += 100) {
     var opt = i;
     var el = document.createElement("option");
     el.textContent = opt;
@@ -99,6 +102,12 @@ function getMultipleSelected(fieldID) {
     }
   }
   return arrayOfSelecedIDs;
+}
+function getInputValue(fieldID) {
+  // Selecting the input element and get its value
+  var inputVal = document.getElementById(fieldID).value;
+  // Displaying the value
+  return inputVal;
 }
 
 // function to plot the bar graph
@@ -179,32 +188,93 @@ function validate_range(start, end) {
   if (end_val < start_val || start_val > end_val)
     alert("Please select a valid range");
 }
+function validate_custom_range(start_val, end_val) {
+  if (!start_val || !end_val) {
+    alert("Please enter both start and end values ");
+  }
+  start_val = parseInt(start_val);
+  end_val = parseInt(end_val);
+  if (end_val < start_val || start_val > end_val)
+    alert("Please enter a valid range");
+}
 // function to plot graph teams vs runs
-function plotGraphs1(fieldID1, fieldID2, fieldID3) {
+function plotGraphs1(
+  fieldID1,
+  fieldID2,
+  fieldID3,
+  fieldID4,
+  fieldID5,
+  fieldID6,
+  fieldID7
+) {
   teams = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
-  validate_range(start, end);
+  custom_start = getInputValue(fieldID4);
+  custom_end = getInputValue(fieldID5);
+  custom_top = getInputValue(fieldID6);
+  custom_top_value = getInputValue(fieldID7);
+  if (start || end) {
+    validate_range(start, end);
+  }
+  if (custom_start || custom_end) {
+    validate_custom_range(custom_start, custom_end);
+  }
+  if (custom_top_value) {
+    if (parseInt(custom_top_value) > 14) {
+      alert("Value can't exceed 14");
+    }
+  }
   var url = hostname + "ipl/teams-runs-graph/";
   var body = JSON.stringify({
     teams: teams,
     start: start,
     end: end,
+    custom_start: parseInt(custom_start),
+    custom_end: parseInt(custom_end),
+    custom_top: parseInt(custom_top),
+    custom_top_value: parseInt(custom_top_value),
   });
   plotBarGraph(body, url, "Teams vs total runs", "Teams", "Runs", "Total runs");
 }
 
 // function to plot graph players vs runs
-function plotGraphs2(fieldID1, fieldID2, fieldID3) {
+function plotGraphs2(
+  fieldID1,
+  fieldID2,
+  fieldID3,
+  fieldID4,
+  fieldID5,
+  fieldID6,
+  fieldID7
+) {
   players = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
-  validate_range(start, end);
+  custom_start = getInputValue(fieldID4);
+  custom_end = getInputValue(fieldID5);
+  custom_top = getInputValue(fieldID6);
+  custom_top_value = getInputValue(fieldID7);
+  if (start || end) {
+    validate_range(start, end);
+  }
+  if (custom_start || custom_end) {
+    validate_custom_range(custom_start, custom_end);
+  }
+  if (custom_top_value) {
+    if (parseInt(custom_top_value) > 14) {
+      alert("Value can't exceed 14");
+    }
+  }
   var url = hostname + "ipl/player-runs-graph/";
   var body = JSON.stringify({
     players: players,
     start: start,
     end: end,
+    custom_start: parseInt(custom_start),
+    custom_end: parseInt(custom_end),
+    custom_top: parseInt(custom_top),
+    custom_top_value: parseInt(custom_top_value),
   });
   plotBarGraph(body, url, "Players vs runs", "Players", "Runs", "Total runs");
 }
