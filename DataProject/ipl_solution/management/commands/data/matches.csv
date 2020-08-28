@@ -1,5 +1,5 @@
 id,season,city,date,team1,team2,toss_winner,toss_decision,result,dl_applied,winner,win_by_runs,win_by_wickets,player_of_match,venue,umpire1,umpire2
-1,2017,Hyderabad,2017-04-05,abcd,Royal_Challengers_Bangalore,Royal_Challengers_Bangalore,field,normal,0,Sunrisers_Hyderabad,35,0,Yuvraj_Singh,"Rajiv_Gandhi_International_Stadium,_Uppal",AY_Dandekar,NJ_Llong
+1,2017,Hyderabad,2017-04-05,Sunrisers_Hyderabad,Royal_Challengers_Bangalore,Royal_Challengers_Bangalore,field,normal,0,Sunrisers_Hyderabad,35,0,Yuvraj_Singh,"Rajiv_Gandhi_International_Stadium,_Uppal",AY_Dandekar,NJ_Llong
 2,2017,Pune,2017-04-06,Mumbai_Indians,Rising_Pune_Supergiant,Rising_Pune_Supergiant,field,normal,0,Rising_Pune_Supergiant,0,7,SPD_Smith,Maharashtra_Cricket_Association_Stadium,A_Nand_Kishore,S_Ravi
 3,2017,Rajkot,2017-04-07,Gujarat_Lions,Kolkata_Knight_Riders,Kolkata_Knight_Riders,field,normal,0,Kolkata_Knight_Riders,0,10,CA_Lynn,Saurashtra_Cricket_Association_Stadium,Nitin_Menon,CK_Nandan
 4,2017,Indore,2017-04-08,Rising_Pune_Supergiant,Kings_XI_Punjab,Kings_XI_Punjab,field,normal,0,Kings_XI_Punjab,0,6,GJ_Maxwell,Holkar_Cricket_Stadium,AK_Chaudhary,C_Shamshuddin
