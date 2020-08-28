@@ -170,11 +170,21 @@ function plotBarGraph(body, url, title_text, x_text, y_text, tootltip_text) {
       });
     });
 }
+// function to validate the range
+function validate_range(start, end) {
+  let start_arr = Object.values(start);
+  let end_arr = Object.values(end);
+  let start_val = parseInt(start_arr[0]);
+  let end_val = parseInt(end_arr[0]);
+  if (end_val < start_val || start_val > end_val)
+    alert("Please select a valid range");
+}
 // function to plot graph teams vs runs
 function plotGraphs1(fieldID1, fieldID2, fieldID3) {
   teams = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
+  validate_range(start, end);
   var url = hostname + "ipl/teams-runs-graph/";
   var body = JSON.stringify({
     teams: teams,
@@ -189,6 +199,7 @@ function plotGraphs2(fieldID1, fieldID2, fieldID3) {
   players = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
+  validate_range(start, end);
   var url = hostname + "ipl/player-runs-graph/";
   var body = JSON.stringify({
     players: players,
