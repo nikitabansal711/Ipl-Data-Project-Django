@@ -1,6 +1,8 @@
 $(document).ready(function () {
   $('[data-toggle="tooltip"]').tooltip();
 });
+// set hostname and port here
+var hostname = "http://127.0.0.1:8000/";
 // function to get cookie
 function getCookie(name) {
   var cookieValue = null;
@@ -30,7 +32,7 @@ function helper_populateDropdown(select, options) {
 // function to populate dropdown
 function populateDropdown(fieldID) {
   var select = document.getElementById(fieldID);
-  fetch("http://127.0.0.1:8000/ipl/player-data/")
+  fetch(hostname + "ipl/player-data/")
     .then((response) => response.json())
     .then((data) => {
       var options = data["data"];
@@ -53,7 +55,7 @@ function populateDropdown2(fieldID) {
 // function to populate dropdown
 function populateDropdown3(fieldID) {
   var select = document.getElementById(fieldID);
-  fetch("http://127.0.0.1:8000/ipl/umpire-data/")
+  fetch(hostname + "ipl/umpire-data/")
     .then((response) => response.json())
     .then((data) => {
       data = JSON.parse(data["data"]);
@@ -65,7 +67,7 @@ function populateDropdown3(fieldID) {
 // function to populate dropdown
 function populateDropdown4(fieldID) {
   var select = document.getElementById(fieldID);
-  fetch("http://127.0.0.1:8000/ipl/match-team-season-data/")
+  fetch(hostname + "ipl/match-team-season-data/")
     .then((response) => response.json())
     .then((data) => {
       data = JSON.parse(data["data"]);
@@ -77,7 +79,7 @@ function populateDropdown4(fieldID) {
 // function to populate dropdown
 function populateDropdown5(fieldID) {
   var select = document.getElementById(fieldID);
-  fetch("http://127.0.0.1:8000/ipl/teams-runs-data/")
+  fetch(hostname + "ipl/teams-runs-data/")
     .then((response) => response.json())
     .then((data) => {
       var options = data["data"];
@@ -173,7 +175,7 @@ function plotGraphs1(fieldID1, fieldID2, fieldID3) {
   teams = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
-  var url = "http://127.0.0.1:8000/ipl/teams-runs-graph/";
+  var url = hostname + "ipl/teams-runs-graph/";
   var body = JSON.stringify({
     teams: teams,
     start: start,
@@ -187,7 +189,7 @@ function plotGraphs2(fieldID1, fieldID2, fieldID3) {
   players = getMultipleSelected(fieldID1);
   start = getMultipleSelected(fieldID2);
   end = getMultipleSelected(fieldID3);
-  var url = "http://127.0.0.1:8000/ipl/player-runs-graph/";
+  var url = hostname + "ipl/player-runs-graph/";
   var body = JSON.stringify({
     players: players,
     start: start,
@@ -199,7 +201,7 @@ function plotGraphs2(fieldID1, fieldID2, fieldID3) {
 // function to plot graph umpires vs nationality
 function plotGraphs3(fieldID1) {
   nations = getMultipleSelected(fieldID1);
-  var url = "http://127.0.0.1:8000/ipl/umpire-nation-graph/";
+  var url = hostname + "ipl/umpire-nation-graph/";
   var body = JSON.stringify({
     nations: nations,
   });
@@ -218,7 +220,7 @@ function plotGraphs4(fieldID1, fieldID2) {
   seasons = getMultipleSelected(fieldID1);
   teams = getMultipleSelected(fieldID2);
   let csrftoken = getCookie("csrftoken");
-  fetch("http://127.0.0.1:8000/ipl/match-team-season-graph/", {
+  fetch(hostname + "ipl/match-team-season-graph/", {
     method: "POST",
     body: JSON.stringify({
       seasons: seasons,
